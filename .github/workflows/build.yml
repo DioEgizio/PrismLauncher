@@ -491,7 +491,7 @@ jobs:
           LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:${{ env.INSTALL_APPIMAGE_DIR }}/usr/lib/jvm/java-17-openjdk/lib"
           export LD_LIBRARY_PATH
 
-          ./linuxdeploy-x86_64.AppImage --appdir ${{ env.INSTALL_APPIMAGE_DIR }} --output appimage --plugin qt -i ${{ env.INSTALL_APPIMAGE_DIR }}/usr/share/icons/hicolor/scalable/apps/org.prismlauncher.PrismLauncher.svg
+          ./linuxdeploy-x86_64.AppImage --appdir ${{ env.INSTALL_APPIMAGE_DIR }} --output appimage --plugin qt -i ${{ env.INSTALL_APPIMAGE_DIR }}/usr/share/icons/hicolor/scalable/apps/org.prismlauncher.PrismLauncher.svg --UPDATE_INFORMATION="gh-releases-zsync|PrismLauncher|PrismLauncher|latest|PrismLauncher-Linux-*x86_64.AppImage.zsync
 
       ##
       # UPLOAD BUILDS
@@ -559,6 +559,13 @@ jobs:
         with:
           name: PrismLauncher-${{ runner.os }}-${{ env.VERSION }}-${{ inputs.build_type }}-x86_64.AppImage
           path: PrismLauncher-${{ runner.os }}-${{ env.VERSION }}-${{ inputs.build_type }}-x86_64.AppImage
+
+      - name: Upload AppImage zsync (Linux)
+        if: runner.os == 'Linux' && matrix.qt_ver != 5
+        uses: actions/upload-artifact@v3
+        with:
+          name: PrismLauncher-${{ runner.os }}-${{ env.VERSION }}-${{ inputs.build_type }}-x86_64.AppImage.zsync
+          path: PrismLauncher-${{ runner.os }}-${{ env.VERSION }}-${{ inputs.build_type }}-x86_64.AppImage.zsync
 
       - name: ccache stats (Windows MinGW-w64)
         if: runner.os == 'Windows' && matrix.msystem != ''
