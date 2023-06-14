@@ -89,6 +89,7 @@ jobs:
           files: |
             PrismLauncher-Linux-${{ env.VERSION }}.tar.gz
             PrismLauncher-Linux-Portable-${{ env.VERSION }}.tar.gz
+            PrismLauncher-Linux-${{ env.VERSION }}-x86_64.AppImage.zsync
             PrismLauncher-Linux-${{ env.VERSION }}-x86_64.AppImage
             PrismLauncher-Linux-Qt6-${{ env.VERSION }}.tar.gz
             PrismLauncher-Linux-Qt6-Portable-${{ env.VERSION }}.tar.gz
