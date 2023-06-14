@@ -191,7 +191,7 @@ jobs:
         if: runner.os == 'Linux'
         run: |
           sudo apt-get -y update
-          sudo apt-get -y install ninja-build extra-cmake-modules scdoc
+          sudo apt-get -y install ninja-build extra-cmake-modules scdoc appstream
 
       - name: Install Dependencies (macOS)
         if: runner.os == 'macOS'
@@ -469,6 +469,7 @@ jobs:
           cmake --install ${{ env.BUILD_DIR }} --prefix ${{ env.INSTALL_APPIMAGE_DIR }}/usr
 
           export OUTPUT="PrismLauncher-${{ runner.os }}-${{ env.VERSION }}-${{ inputs.build_type }}-x86_64.AppImage"
+          export UPDATE_INFORMATION="gh-releases-zsync|DioEgizio|PrismLauncher|latest|PrismLauncher-Linux-*x86_64.AppImage.zsync"
 
           chmod +x linuxdeploy-*.AppImage
 
@@ -491,7 +492,7 @@ jobs:
           LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:${{ env.INSTALL_APPIMAGE_DIR }}/usr/lib/jvm/java-17-openjdk/lib"
           export LD_LIBRARY_PATH
 
-          UPDATE_INFORMATION="gh-releases-zsync|DioEgizio|PrismLauncher|latest|PrismLauncher-Linux-*x86_64.AppImage.zsync"./linuxdeploy-x86_64.AppImage --appdir ${{ env.INSTALL_APPIMAGE_DIR }} --output appimage --plugin qt -i ${{ env.INSTALL_APPIMAGE_DIR }}/usr/share/icons/hicolor/scalable/apps/org.prismlauncher.PrismLauncher.svg
+          ./linuxdeploy-x86_64.AppImage --appdir ${{ env.INSTALL_APPIMAGE_DIR }} --output appimage --plugin qt -i ${{ env.INSTALL_APPIMAGE_DIR }}/usr/share/icons/hicolor/scalable/apps/org.prismlauncher.PrismLauncher.svg
 
       ##
       # UPLOAD BUILDS
