@@ -48,12 +48,12 @@ jobs:
             qt_modules: "qt5compat qtimageformats"
             qt_tools: ""
 
-          - os: windows-2022
+          - os: windows-2019
             name: "Windows-MinGW-w64"
             msystem: clang64
             vcvars_arch: "amd64_x86"
 
-          - os: windows-2022
+          - os: windows-2019
             name: "Windows-MSVC"
             msystem: ""
             architecture: "x64"
@@ -65,7 +65,7 @@ jobs:
             qt_modules: 'qt5compat qtimageformats'
             qt_tools: ''
 
-          - os: windows-2022
+          - os: windows-2019
             name: "Windows-MSVC-arm64"
             msystem: ""
             architecture: "arm64"
@@ -232,7 +232,6 @@ jobs:
         if: runner.os == 'Windows' # We want this for MinGW builds as well, as we need SignTool
         uses: ilammy/msvc-dev-cmd@v1
         with:
-          vsversion: 2022
           arch: ${{ matrix.vcvars_arch }}
 
       - name: Prepare AppImage (Linux)
