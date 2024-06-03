@@ -20,7 +20,7 @@
 #include <QObject>
 #include <QTimer>
 
-#include <SDL_gamecontroller.h>
+#include <SDL2/SDL_gamecontroller.h>
 
 class GamepadManager : public QObject {
     Q_OBJECT

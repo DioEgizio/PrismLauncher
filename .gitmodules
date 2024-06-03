@@ -25,6 +25,7 @@
 [submodule "libraries/SDL"]
 	path = libraries/SDL
 	url = https://github.com/libsdl-org/SDL.git
+    branch = SDL2
 [submodule "libraries/SDL_GameControllerDB"]
 	path = libraries/SDL_GameControllerDB
 	url = https://github.com/mdqinc/SDL_GameControllerDB.git
