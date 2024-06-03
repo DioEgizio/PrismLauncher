@@ -28,10 +28,10 @@
 
 #include "Application.h"
 
-#include <SDL2/SDL.h>
-#include <SDL2/SDL_events.h>
-#include <SDL2/SDL_gamecontroller.h>
-#include <SDL2/SDL_stdinc.h>
+#include <SDL.h>
+#include <SDL_events.h>
+#include <SDL_gamecontroller.h>
+#include <SDL_stdinc.h>
 // Reset bool redefinition from SDL header
 #undef bool
 
