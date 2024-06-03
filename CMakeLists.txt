@@ -537,6 +537,10 @@ endif()
 add_subdirectory(libraries/qdcss) # css parser
 if(NOT SDL2_FOUND)
     message(STATUS "Using bundled SDL2")
+    set(BUILD_SHARED_LIBS 0)  # link statically to avoid conflicts.
+    set(SDL_SHARED OFF)
+    set(SDL_STATIC ON)
+    set(SDL_TEST OFF)
     add_subdirectory(libraries/SDL) # SDL (used for gamepad support)
 else()
     message(STATUS "Using system SDL2")
