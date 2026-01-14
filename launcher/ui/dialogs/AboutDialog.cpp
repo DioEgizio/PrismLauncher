@@ -104,11 +104,6 @@ AboutDialog::AboutDialog(QWidget* parent) : QDialog(parent), ui(new Ui::AboutDia
     else
         ui->commitLabel->setVisible(false);
 
-    if (!BuildConfig.BUILD_DATE.isEmpty())
-        ui->buildDateLabel->setText(tr("Build date: %1").arg(BuildConfig.BUILD_DATE));
-    else
-        ui->buildDateLabel->setVisible(false);
-
     if (!BuildConfig.VERSION_CHANNEL.isEmpty())
         ui->channelLabel->setText(tr("Channel") + ": " + BuildConfig.VERSION_CHANNEL);
     else

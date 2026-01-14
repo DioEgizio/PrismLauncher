@@ -60,7 +60,6 @@ Config::Config()
 
     BUILD_PLATFORM = "@Launcher_BUILD_PLATFORM@";
     BUILD_ARTIFACT = "@Launcher_BUILD_ARTIFACT@";
-    BUILD_DATE = "@Launcher_BUILD_TIMESTAMP@";
     UPDATER_GITHUB_REPO = "@Launcher_UPDATER_GITHUB_REPO@";
 
     COMPILER_NAME = "@Launcher_COMPILER_NAME@";

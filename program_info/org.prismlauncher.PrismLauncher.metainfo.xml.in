@@ -59,7 +59,14 @@
     </screenshot>
   </screenshots>
   <releases>
-    <release version="@Launcher_VERSION_NAME@" date="@Launcher_BUILD_TIMESTAMP@"></release>
+    <release version="@Launcher_VERSION_NAME@" date="2026-02-14"></release>
+      <description>
+        <p>Check out launcher update changelogs at https://prismlauncher.org/news/</p>
+      </description>
+  <branding>
+    <color type="primary" scheme_preference="light">#007e9e</color>
+    <color type="primary" scheme_preference="dark">#007e9e</color>
+  </branding>
   </releases>
   <url type="homepage">https://prismlauncher.org/</url>
   <url type="bugtracker">https://github.com/PrismLauncher/PrismLauncher/issues</url>

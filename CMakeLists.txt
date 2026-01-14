@@ -278,9 +278,6 @@ message(STATUS "Git commit: ${Launcher_GIT_COMMIT}")
 message(STATUS "Git tag: ${Launcher_GIT_TAG}")
 message(STATUS "Git refspec: ${Launcher_GIT_REFSPEC}")
 
-string(TIMESTAMP TODAY "%Y-%m-%d")
-set(Launcher_BUILD_TIMESTAMP "${TODAY}")
-
 ################################ 3rd Party Libs ################################
 
 # Find the required Qt parts

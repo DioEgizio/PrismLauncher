@@ -77,9 +77,6 @@ class Config {
     /// A short string identifying this build's valid artifacts int he updater. For example, "lin64" or "win32".
     QString BUILD_ARTIFACT;
 
-    /// A string containing the build timestamp
-    QString BUILD_DATE;
-
     /// A string identifying the compiler use to build
     QString COMPILER_NAME;
 
