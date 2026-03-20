@@ -59,7 +59,7 @@ SkinManageDialog::SkinManageDialog(QWidget* parent, MinecraftAccountPtr acct)
 {
     m_ui->setupUi(this);
 
-    if (SkinOpenGLWindow::hasOpenGL()) {
+    if (SkinOpenGLWindow::hasOpenGL() || QProcessEnvironment::systemEnvironment().value(QStringLiteral("LAUNCHER_DISABLE_GLVULKAN")).isEmpty()) {
         m_skinPreview = new SkinOpenGLWindow(this, palette().color(QPalette::Normal, QPalette::Base));
     } else {
         m_skinPreviewLabel = new QLabel(this);

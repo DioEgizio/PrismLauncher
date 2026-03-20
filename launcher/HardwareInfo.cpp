@@ -234,7 +234,7 @@ QStringList HardwareInfo::gpuInfo()
     QStringList list;
     const bool vulkanSuccess = vulkanInfo(list);
     const bool openGlSuccess = openGlInfo(list);
-    if (vulkanSuccess || openGlSuccess) {
+    if (vulkanSuccess || openGlSuccess || !QProcessEnvironment::systemEnvironment().value(QStringLiteral("LAUNCHER_DISABLE_GLVULKAN")).isEmpty()) {
         return list;
     }
 
