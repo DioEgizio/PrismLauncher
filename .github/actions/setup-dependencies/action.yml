@@ -8,7 +8,8 @@ inputs:
     default: Debug
   artifact-name:
     description: Name of the uploaded artifact
-    required: true
+    required: false
+    default: Linux
   msystem:
     description: MSYS2 subsystem to use
     required: false
@@ -21,6 +22,10 @@ inputs:
   qt-version:
     description: Version of Qt to use
     required: true
+  codeql:
+    description: only enable on the CodeQL action
+    required: false
+    default: 'false'
 
 outputs:
   build-type:
@@ -54,7 +59,7 @@ runs:
 
     # TODO(@getchoo): Get this working on MSYS2!
     - name: Setup ccache
-      if: ${{ (runner.os != 'Windows' || inputs.msystem == '') && inputs.build-type == 'Debug' }}
+      if: ${{ (runner.os != 'Windows' || inputs.msystem == '') && inputs.build-type == 'Debug' && inputs.codeql != 'true' }}
       uses: hendrikmuhs/ccache-action@v1.2.23
       with:
         variant: sccache
@@ -62,7 +67,7 @@ runs:
         key: ${{ runner.os }}-${{ runner.arch }}-${{ inputs.artifact-name }}-sccache
 
     - name: Use ccache on debug builds
-      if: ${{ inputs.build-type == 'Debug' }}
+      if: ${{ inputs.build-type == 'Debug' && inputs.codeql != 'true' }}
       shell: bash
       env:
         # Only use ccache on MSYS2
@@ -112,24 +117,14 @@ runs:
 
         echo "VCPKG_TRIPLET=$vcpkg_arch-$vcpkg_platform" >> "$GITHUB_ENV"
 
-  # old python versions detect 7z files as zip, breaking aqtinstall. see https://github.com/miurahr/aqtinstall/issues/1042
-    - name: Update Python
-      if: ${{ inputs.msystem == '' }}
-      uses: actions/setup-python@v7
+    - name: Install JDK 17
+      uses: actions/setup-java@v6
       with:
-        python-version: '3.15'
+        distribution: zulu
+        java-version: '17'
 
     - name: Install Qt
-      uses: jurplel/install-qt-action@v4
+      uses: DioEgizio/qtbuild@6.12
       with:
         version: ${{ inputs.qt-version }}
-        setup-python: false
-        aqtsource: git+https://github.com/miurahr/aqtinstall.git@16db45a70b5905ad596941b223469bc86a56901e
-        modules: qtimageformats qtnetworkauth
-        cache: ${{ inputs.build-type == 'Debug' }}
-        arch: ${{ inputs.msystem != '' && 'win64_llvm_mingw' || '' }}
-
-    - name: Set Qt6_DIR
-      shell: bash
-      run: |
-        echo "Qt6_DIR=$QT_ROOT_DIR" >> "$GITHUB_ENV"
+        preset: ${{ inputs.artifact-name }}

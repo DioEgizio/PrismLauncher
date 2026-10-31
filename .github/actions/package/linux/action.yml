@@ -32,12 +32,9 @@ runs:
       run: |
         rm -rf "$QT_PLUGIN_PATH"/printsupport
         rm -rf "$QT_PLUGIN_PATH"/sqldrivers
-        rm -rf "$QT_PLUGIN_PATH"/help
-        rm -rf "$QT_PLUGIN_PATH"/designer
         rm -rf "$QT_PLUGIN_PATH"/qmltooling
         rm -rf "$QT_PLUGIN_PATH"/qmlls
         rm -rf "$QT_PLUGIN_PATH"/qmllint
-        rm -rf "$QT_PLUGIN_PATH"/platformthemes/libqgtk3.so
 
     - name: Setup build variables
       shell: bash
@@ -71,6 +68,9 @@ runs:
         GPG_PRIVATE_KEY: ${{ inputs.gpg-private-key }}
       run: |
         cmake --install ${{ env.BUILD_DIR }} --config ${{ inputs.build-type }} --prefix ${{ env.INSTALL_APPIMAGE_DIR }}
+
+        # FIXME: remove once https://github.com/VHSgunzo/sharun/pull/122 is merged.
+        printf '[Paths]\nPrefix = ../shared/lib%s\nPlugins = plugins\nImports = qml\nQml2Imports = qml\n' "$QT_DIR" > "$INSTALL_APPIMAGE_DIR/bin/qt.conf"
 
         if [ '${{ inputs.gpg-private-key-id }}' != '' ]; then
           echo "$GPG_PRIVATE_KEY" > privkey.asc
@@ -120,6 +120,9 @@ runs:
       run: |
         cmake --install ${{ env.BUILD_DIR }} --config ${{ inputs.build-type }} --prefix ${{ env.INSTALL_PORTABLE_DIR }}
         cmake --install ${{ env.BUILD_DIR }} --config ${{ inputs.build-type }} --prefix ${{ env.INSTALL_PORTABLE_DIR }} --component portable
+
+        # FIXME: remove once https://github.com/VHSgunzo/sharun/pull/122 is merged.
+        printf '[Paths]\nPrefix = ../shared/lib%s\nPlugins = plugins\nImports = qml\nQml2Imports = qml\n' "$QT_DIR" > "$INSTALL_PORTABLE_DIR/bin/qt.conf"
 
         sharun lib4bin \
           --with-hooks \
