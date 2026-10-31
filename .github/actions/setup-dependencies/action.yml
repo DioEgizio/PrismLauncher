@@ -112,24 +112,8 @@ runs:
 
         echo "VCPKG_TRIPLET=$vcpkg_arch-$vcpkg_platform" >> "$GITHUB_ENV"
 
-  # old python versions detect 7z files as zip, breaking aqtinstall. see https://github.com/miurahr/aqtinstall/issues/1042
-    - name: Update Python
-      if: ${{ inputs.msystem == '' }}
-      uses: actions/setup-python@v7
-      with:
-        python-version: '3.15'
-
     - name: Install Qt
-      uses: jurplel/install-qt-action@v4
+      uses: DioEgizio/qtbuilder@6.12
       with:
-        version: ${{ inputs.qt-version }}
-        setup-python: false
-        aqtsource: git+https://github.com/miurahr/aqtinstall.git@16db45a70b5905ad596941b223469bc86a56901e
-        modules: qtimageformats qtnetworkauth
-        cache: ${{ inputs.build-type == 'Debug' }}
-        arch: ${{ inputs.msystem != '' && 'win64_llvm_mingw' || '' }}
-
-    - name: Set Qt6_DIR
-      shell: bash
-      run: |
-        echo "Qt6_DIR=$QT_ROOT_DIR" >> "$GITHUB_ENV"
+        tag: ${{ inputs.qt-version }}
+        preset: ${{ inputs.artifact-name }}

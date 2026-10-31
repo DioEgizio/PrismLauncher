@@ -1486,7 +1486,7 @@ endif()
 # NOTE: it seems that this absolutely has to be here, and nowhere else.
 if(WIN32 OR (UNIX AND APPLE))
     if(WIN32)
-        set(QT_DEPLOY_TOOL_OPTIONS "--no-opengl-sw --no-quick-import --no-system-d3d-compiler --no-system-dxc-compiler --skip-plugin-types generic,networkinformation")
+        set(QT_DEPLOY_TOOL_OPTIONS "--force-openssl --no-opengl-sw --no-quick-import --no-system-d3d-compiler --no-system-dxc-compiler --skip-plugin-types generic,networkinformation")
     endif()
 
     qt_generate_deploy_script(
